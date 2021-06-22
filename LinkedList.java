@@ -1,10 +1,12 @@
 import java.util.Scanner;
 
 /**
- * Ability to insert 40 after 30 to the Linked List sequence of 56->30->70
- * - Search LinkedList to get Node with key value 30
- * - Then Insert 40 to 30
- * - Final Sequence: 56->30->40->70
+ * Ability to delete 40 from the Linked List sequence of 56->30->40->70
+ * and show the size of LinkedList is 3
+ * - Search LinkedList to find node with key value 40
+ * - Delete the node
+ * - Implement size() and show the Linked List size is 3
+ * - Final Sequence: 56->30->70
  *
  * Here it can insert,create,and can delete first and last element of linked list,can search elements in
  * linked list
@@ -52,22 +54,33 @@ public class LinkedList {
                     linkedList.popLast();
                     break;
                 case 5:
+                    System.out.println("Enter the element you want to delete :");
+                    element = scanner.nextInt();
+                    boolean flag1 = linkedList.deleteParticularNode(element);
+                    if(flag1 == false)
+                        System.out.println(element+" is not present in the list");
+                    else
+                        System.out.println(element+" successfully deleted from list");
+                    break;
+                case 6:
                     System.out.println("Enter the element you want to search : ");
                     element = scanner.nextInt();
-                    boolean flag1 = linkedList.searchElement(element);
+                    flag1 = linkedList.searchElement(element);
                     if(flag1 == false)
                         System.out.println(element+" is not present in the list");
                     break;
-                case 6:
+                case 7:
                     linkedList.printLinkedList();
                     break;
-                case 7:
+                case 8:
+                    int size = linkedList.size();
+                    System.out.println("Size of linked list is : "+size);
+                    break;
+                case 9:
                     flag = false;
                     break;
             }
         }
-        int size = linkedList.size();
-        System.out.println("Size of linked list is : "+size);
     }
 
     // user console
@@ -76,9 +89,11 @@ public class LinkedList {
         System.out.println("Press 2 to insert element in  Linked List");
         System.out.println("Press 3 to delete FIRST element of Linked List");
         System.out.println("Press 4 to delete LAST element of Linked List");
-        System.out.println("Press 5 to search element in Linked List");
-        System.out.println("Press 6 to display Linked List");
-        System.out.println("Press 7 to EXIT ");
+        System.out.println("Press 5 to delete particular element from the List");
+        System.out.println("Press 6 to search element in Linked List");
+        System.out.println("Press 7 to display Linked List");
+        System.out.println("Press 8 to check size Linked List");
+        System.out.println("Press 9 to EXIT ");
 
         return scanner.nextInt();
     }
@@ -183,7 +198,7 @@ public class LinkedList {
             size --;
         }
     }
-    
+
     // searches the element by traversing the linked list
     public boolean searchElement(Integer element){
         if(head == null)
@@ -200,6 +215,28 @@ public class LinkedList {
                 currentNode = currentNode.getNext();
             }
         }
+        return false;
+    }
+
+    // deletes particular element that from linked list by traversing
+    public boolean deleteParticularNode(Integer element){
+        INode currentNode = head;
+        INode previousNode = null;
+        while (currentNode != null){
+            // comparing element with current node if found removes it and returns true
+            if(currentNode.getKey() == element){
+                if(previousNode == null){
+                    head = currentNode.getNext();
+                }else{
+                    previousNode.setNext(currentNode.getNext());
+                }
+                size --;
+                return true;
+            }
+            previousNode = currentNode;
+            currentNode = currentNode.getNext();
+        }
+        // if element not found in list
         return false;
     }
 
