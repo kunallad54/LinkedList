@@ -1,2 +1,4 @@
 # LinkedList
-Solved day 14 problems
+
+## USECASES :
+1. Created a simple Linked List of 56, 30 and 70
