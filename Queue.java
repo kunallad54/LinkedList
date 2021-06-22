@@ -1,10 +1,9 @@
 import java.util.Scanner;
 
 /**
- * Ability to create a Queue of 56->30->70
- * - Use LinkedList to do the Queue Operations
- * - Here enqueue will internally call append method on LinkedList.
- * - So 56 will be added first then 30 and then 70 to make 56 on top of the Stack
+ * Ability to dequeue from the beginning
+ * -Use LinkedList to do the Queue Operations
+ * here it performs enqueue and dequeue operations
  *
  * @author Krunal Lad
  * @Since 22-06-2021
@@ -22,6 +21,11 @@ public class Queue<K> {
     public void enqueueElements(Integer element) {
         Node<Integer> newNode = new Node<Integer>(element);
         linkedList.append(newNode);
+    }
+
+    // performing dequeue as First in gets First Out
+    public void dequeueElement(){
+        linkedList.popFirst();
     }
 
     // printing queue elements
@@ -42,9 +46,13 @@ public class Queue<K> {
                     queue.enqueueElements(element);
                     break;
                 case 2:
-                    queue.printQueue();
+                    queue.dequeueElement();
+                    System.out.println("Dequeue Operation successfully performed !!! ");
                     break;
                 case 3:
+                    queue.printQueue();
+                    break;
+                case 4:
                     flag = false;
                     break;
             }
@@ -53,9 +61,10 @@ public class Queue<K> {
 
     // view
     public int userConsole() {
-        System.out.println("Press 1 - to insert elements in Queue");
-        System.out.println("Press 2 - to Display queue elements");
-        System.out.println("Press 3 - to EXIT ");
+        System.out.println("Press 1 - to perform Enqueue Operation");
+        System.out.println("Press 2 - to perform Dequeue Operation");
+        System.out.println("Press 3 - to Display queue elements");
+        System.out.println("Press 4 - to EXIT ");
 
         return scanner.nextInt();
     }
