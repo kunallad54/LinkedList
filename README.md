@@ -23,11 +23,15 @@
    - Write popLast method
    - Note there is new tail
    - Final Sequence: 56->30
-7. Ability to search LinkedList to find Node with value 30
-   - Write Junit Test Case as demonstrated in class
+7. Ability to search LinkedList to find Node with value 3
    - Loop through LinkedList to find node with key 30
 8. Ability to insert 40 after 30 to the Linked List sequence of 56->30->70
-   - Write Junit Test Case as demonstrated in class
    - Search LinkedList to get Node with key value 30
    - Then Insert 40 to 30
    - Final Sequence: 56->30->40->70
+9. Ability to delete 40 from the Linked List sequence of 56->30->40->70
+   and show the size of LinkedList is 3
+   - Search LinkedList to find node with key value 40
+   - Delete the node
+   - Implement size() and show the Linked List size is 3
+   - Final Sequence: 56->30->70
