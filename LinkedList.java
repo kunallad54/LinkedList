@@ -1,8 +1,10 @@
 import java.util.Scanner;
 
 /**
- * Ability to search LinkedList to find Node with value 30
- * - Loop through LinkedList to find node with key 30
+ * Ability to insert 40 after 30 to the Linked List sequence of 56->30->70
+ * - Search LinkedList to get Node with key value 30
+ * - Then Insert 40 to 30
+ * - Final Sequence: 56->30->40->70
  *
  * Here it can insert,create,and can delete first and last element of linked list,can search elements in
  * linked list
@@ -51,8 +53,10 @@ public class LinkedList {
                     break;
                 case 5:
                     System.out.println("Enter the element you want to search : ");
-                    Integer value = scanner.nextInt();
-                    linkedList.searchElement(value);
+                    element = scanner.nextInt();
+                    boolean flag1 = linkedList.searchElement(element);
+                    if(flag1 == false)
+                        System.out.println(element+" is not present in the list");
                     break;
                 case 6:
                     linkedList.printLinkedList();
@@ -179,8 +183,9 @@ public class LinkedList {
             size --;
         }
     }
-
-    public void searchElement(Integer element){
+    
+    // searches the element by traversing the linked list
+    public boolean searchElement(Integer element){
         if(head == null)
             System.out.println("Linked List is empty");
         else{
@@ -190,10 +195,12 @@ public class LinkedList {
                 position++;
                 if(currentNode.getKey() == element){
                     System.out.println(element+" is present at position "+position+" in list");
+                    return true;
                 }
                 currentNode = currentNode.getNext();
             }
         }
+        return false;
     }
 
     // prints linked list
