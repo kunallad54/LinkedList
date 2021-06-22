@@ -18,3 +18,8 @@
    of sequence 56->30->70 - Write pop method
    - Note there is new head
    - Final Sequence: 30->70
+6. Ability to delete the last element 
+   in the LinkedList of sequence 56->30->70
+   - Write popLast method
+   - Note there is new tail
+   - Final Sequence: 56->30
