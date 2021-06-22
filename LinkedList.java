@@ -1,8 +1,8 @@
 /**
- * Ability to create Linked List by adding 30 and 56 to 70
- * - Node with data 70 is First Created
- * - Next 30 is added to 70
- * - Finally 56 is added to 30
+ * Ability to create Linked List by appending 30 and 70 to 56
+ * - Node with data 56 is First Created
+ * - Next Append 30 to 56
+ * - Finally Append 70 to 30
  * - LinkedList Sequence: 56->30->70
  *
  * @author Krunal Lad
@@ -26,12 +26,12 @@ public class LinkedList {
 
     // creates linked list
     public void createLinkedList() {
-        Node<Integer> myFirstNode = new Node<Integer>(70);
+        Node<Integer> myFirstNode = new Node<Integer>(56);
         Node<Integer> mySecondNode = new Node<Integer>(30);
-        Node<Integer> myThirdNode = new Node<Integer>(56);
-        linkedList.add(myFirstNode);
-        linkedList.add(mySecondNode);
-        linkedList.add(myThirdNode);
+        Node<Integer> myThirdNode = new Node<Integer>(70);
+        linkedList.append(myFirstNode);
+        linkedList.append(mySecondNode);
+        linkedList.append(myThirdNode);
     }
 
     // adds new nodes to linked list
@@ -42,11 +42,27 @@ public class LinkedList {
         if (tail == null) {
             tail = newNode;
         } else {
-            //temporary node will initially store head value, 
+            //temporary node will initially store head value,
             // then new node will become head nad new node next will store old head value
             INode tempNode = head;
             head = newNode;
             head.setNext(tempNode);
+        }
+    }
+
+    // appends new nodes to linked list
+    private void append(INode newNode){
+        // checks if linked list is empty then head and tail points to first node
+        if(head == null)
+            head = newNode;
+        if(tail == null)
+            tail = newNode;
+        else {
+            //temporary node will initially store tail value,
+            // then new node will become tail nad temporary node next will point to new node
+            INode tempNode = tail;
+            tail = newNode;
+            tempNode.setNext(newNode);
         }
     }
 
