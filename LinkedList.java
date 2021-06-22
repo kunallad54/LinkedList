@@ -1,15 +1,16 @@
 import java.util.Scanner;
 
 /**
- * Ability to delete 40 from the Linked List sequence of 56->30->40->70
- * and show the size of LinkedList is 3
- * - Search LinkedList to find node with key value 40
- * - Delete the node
- * - Implement size() and show the Linked List size is 3
- * - Final Sequence: 56->30->70
+ * AAbility to create Ordered Linked List in ascending order of data entered in following sequence 56, 30, 40,
+ * and 70
+ * - Refactor the code to create SortedLinkedList Class
+ * - Create Node that takes data that is Comparable
+ * - Perform Sorting during the add method call
+ * - Final Sequence: 30->40->56->70
+ *
  *
  * Here it can insert,create,and can delete first and last element of linked list,can search elements in
- * linked list
+ * linked list,it can also sort the linked list while inserting the data
  *
  * @author Krunal Lad
  * @Since 22-06-2021
@@ -57,26 +58,29 @@ public class LinkedList {
                     System.out.println("Enter the element you want to delete :");
                     element = scanner.nextInt();
                     boolean flag1 = linkedList.deleteParticularNode(element);
-                    if(flag1 == false)
-                        System.out.println(element+" is not present in the list");
+                    if (flag1 == false)
+                        System.out.println(element + " is not present in the list");
                     else
-                        System.out.println(element+" successfully deleted from list");
+                        System.out.println(element + " successfully deleted from list");
                     break;
                 case 6:
                     System.out.println("Enter the element you want to search : ");
                     element = scanner.nextInt();
                     flag1 = linkedList.searchElement(element);
-                    if(flag1 == false)
-                        System.out.println(element+" is not present in the list");
+                    if (flag1 == false)
+                        System.out.println(element + " is not present in the list");
                     break;
                 case 7:
                     linkedList.printLinkedList();
                     break;
                 case 8:
                     int size = linkedList.size();
-                    System.out.println("Size of linked list is : "+size);
+                    System.out.println("Size of linked list is : " + size);
                     break;
                 case 9:
+                    linkedList.createOrderedLinkedList();
+                    break;
+                case 10:
                     flag = false;
                     break;
             }
@@ -93,7 +97,8 @@ public class LinkedList {
         System.out.println("Press 6 to search element in Linked List");
         System.out.println("Press 7 to display Linked List");
         System.out.println("Press 8 to check size Linked List");
-        System.out.println("Press 9 to EXIT ");
+        System.out.println("Press 9 to create Ordered Linked List");
+        System.out.println("Press 10 to EXIT ");
 
         return scanner.nextInt();
     }
@@ -171,7 +176,7 @@ public class LinkedList {
                 newNode.setNext(currentNode);
                 previousNode.setNext(newNode);
             }
-            size ++;
+            size++;
         }
     }
 
@@ -181,7 +186,7 @@ public class LinkedList {
             System.out.println("No element to delete");
         } else {
             head = head.getNext();
-            size --;
+            size--;
         }
     }
 
@@ -190,26 +195,26 @@ public class LinkedList {
         if (head == null) {
             System.out.println("No element to delete");
         } else {
-            INode currentNode =  head;
-            while (currentNode.getNext().getNext() != null){
+            INode currentNode = head;
+            while (currentNode.getNext().getNext() != null) {
                 currentNode = currentNode.getNext();
             }
             currentNode.setNext(null);
-            size --;
+            size--;
         }
     }
 
     // searches the element by traversing the linked list
-    public boolean searchElement(Integer element){
-        if(head == null)
+    public boolean searchElement(Integer element) {
+        if (head == null)
             System.out.println("Linked List is empty");
-        else{
+        else {
             INode currentNode = head;
             int position = 0;
-            while (currentNode != null){
+            while (currentNode != null) {
                 position++;
-                if(currentNode.getKey() == element){
-                    System.out.println(element+" is present at position "+position+" in list");
+                if (currentNode.getKey() == element) {
+                    System.out.println(element + " is present at position " + position + " in list");
                     return true;
                 }
                 currentNode = currentNode.getNext();
@@ -219,18 +224,18 @@ public class LinkedList {
     }
 
     // deletes particular element that from linked list by traversing
-    public boolean deleteParticularNode(Integer element){
+    public boolean deleteParticularNode(Integer element) {
         INode currentNode = head;
         INode previousNode = null;
-        while (currentNode != null){
+        while (currentNode != null) {
             // comparing element with current node if found removes it and returns true
-            if(currentNode.getKey() == element){
-                if(previousNode == null){
+            if (currentNode.getKey() == element) {
+                if (previousNode == null) {
                     head = currentNode.getNext();
-                }else{
+                } else {
                     previousNode.setNext(currentNode.getNext());
                 }
-                size --;
+                size--;
                 return true;
             }
             previousNode = currentNode;
@@ -239,6 +244,44 @@ public class LinkedList {
         // if element not found in list
         return false;
     }
+
+    // sorting linked list while inserting elements in the list
+    public void createOrderedLinkedList() {
+        boolean flag = true;
+        while (flag){
+            System.out.println(" Enter the data you want to insert :");
+            Integer element = scanner.nextInt();
+            Node<Integer> newNode = new Node<Integer>(element);
+            newNode.setKey(element);
+            newNode.setNext(null);
+            if(head == null || newNode.getKey() <=(Integer) head.getKey()){
+                newNode.setNext(head);
+                head = newNode;
+            }
+            else{
+                INode currentNode = head;
+                while (currentNode != null){
+                    // as it reaches the end it needs to break
+                    if(currentNode.getNext() == null)
+                        break;
+                    if(newNode.getKey() >= (Integer) currentNode.getNext().getKey()){
+                        currentNode = currentNode.getNext();
+                        continue;
+                    }
+                    break;
+                }
+                newNode.setNext(currentNode.getNext());
+                currentNode.setNext(newNode);
+            }
+            size++;
+            System.out.println("Want to add more elements ? Press 1 \n Press 0 to exit");
+            int userChoice = scanner.nextInt();
+            if (userChoice == 0)
+                flag = false;
+        }
+
+    }
+
 
     // prints linked list
     public void printLinkedList() {
