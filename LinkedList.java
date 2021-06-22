@@ -27,7 +27,9 @@ public class LinkedList {
         this.tail = null;
         this.size = 0;
     }
-
+    Object head(){
+        return head.getKey();
+    }
     int size() {
         return this.size;
     }
@@ -120,7 +122,7 @@ public class LinkedList {
     }
 
     // adds new nodes to linked list
-    private void add(INode newNode) {
+    public void add(INode newNode) {
         // checks if linked list is empty then head and tail points to first node
         if (head == null)
             head = newNode;
@@ -136,7 +138,7 @@ public class LinkedList {
     }
 
     // appends new nodes to linked list
-    private void append(INode newNode) {
+    public void append(INode newNode) {
         // checks if linked list is empty then head and tail points to first node
         if (head == null)
             head = newNode;
@@ -191,7 +193,7 @@ public class LinkedList {
     }
 
     // deleting last element of linked list
-    private void popLast() {
+    public void popLast() {
         if (head == null) {
             System.out.println("No element to delete");
         } else {
