@@ -12,3 +12,5 @@
    - Next Append 30 to 56
    - Finally Append 70 to 30
    - LinkedList Sequence: 56->30->70
+4. Ability to insert 30 between 56 and 70
+   - Final Sequence: 56->30->70
