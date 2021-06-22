@@ -1,11 +1,11 @@
 import java.util.Scanner;
 
 /**
- * Ability to delete the last element in the LinkedList of sequence 56->30->70 - Write popLast method
- * - Note there is new tail
- * - Final Sequence: 56->30
- * 
- * Here it can insert,create,and can delete first and last element of linked list
+ * Ability to search LinkedList to find Node with value 30
+ * - Loop through LinkedList to find node with key 30
+ *
+ * Here it can insert,create,and can delete first and last element of linked list,can search elements in
+ * linked list
  *
  * @author Krunal Lad
  * @Since 22-06-2021
@@ -50,9 +50,14 @@ public class LinkedList {
                     linkedList.popLast();
                     break;
                 case 5:
-                    linkedList.printLinkedList();
+                    System.out.println("Enter the element you want to search : ");
+                    Integer value = scanner.nextInt();
+                    linkedList.searchElement(value);
                     break;
                 case 6:
+                    linkedList.printLinkedList();
+                    break;
+                case 7:
                     flag = false;
                     break;
             }
@@ -67,8 +72,9 @@ public class LinkedList {
         System.out.println("Press 2 to insert element in  Linked List");
         System.out.println("Press 3 to delete FIRST element of Linked List");
         System.out.println("Press 4 to delete LAST element of Linked List");
-        System.out.println("Press 5 to display Linked List");
-        System.out.println("Press 6 to EXIT ");
+        System.out.println("Press 5 to search element in Linked List");
+        System.out.println("Press 6 to display Linked List");
+        System.out.println("Press 7 to EXIT ");
 
         return scanner.nextInt();
     }
@@ -171,6 +177,22 @@ public class LinkedList {
             }
             currentNode.setNext(null);
             size --;
+        }
+    }
+
+    public void searchElement(Integer element){
+        if(head == null)
+            System.out.println("Linked List is empty");
+        else{
+            INode currentNode = head;
+            int position = 0;
+            while (currentNode != null){
+                position++;
+                if(currentNode.getKey() == element){
+                    System.out.println(element+" is present at position "+position+" in list");
+                }
+                currentNode = currentNode.getNext();
+            }
         }
     }
 
